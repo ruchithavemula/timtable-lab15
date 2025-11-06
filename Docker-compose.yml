@@ -16,7 +16,7 @@ services:
     image : ruchithavemula11/table-backend:latest 
     container_name: tablebackend
     ports:
-      - "30080:2026"
+      - "30080:2090"
     depends_on:
       - mysqldb
     restart: on-failure
