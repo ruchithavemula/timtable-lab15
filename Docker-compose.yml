@@ -1,0 +1,41 @@
+services:
+  mysqldb:   
+    image: mysql:8
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ruchi    
+      MYSQL_DATABASE: timetabledb 
+    ports: 
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - springboot-mysql-net
+
+  backend:
+    image : ruchithavemula11/table-backend:latest 
+    container_name: tablebackend
+    ports:
+      - "30080:2026"
+    depends_on:
+      - mysqldb
+    restart: on-failure
+    networks:
+      - springboot-mysql-net
+
+  frontend:
+    image: ruchithavemula11/table-frontend:latest
+    container_name: tablefrontend
+    ports:
+      - "30090:80"
+    depends_on:
+      - backend
+    restart: on-failure
+    networks:
+      - springboot-mysql-net
+
+volumes:
+  mysql_data:
+
+networks:
+  springboot-mysql-net:
