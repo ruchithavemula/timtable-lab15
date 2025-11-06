@@ -1,5 +1,5 @@
 const config = {
-  baseUrl: "http://localhost:2026/api/timetable"
+  baseUrl: "http://localhost:30080/api/timetable"
 };
 
 export default config;
